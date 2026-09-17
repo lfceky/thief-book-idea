@@ -14,6 +14,11 @@
 
 <img src="src/main/resources/static/main.png" alt="main" width="800" />
 
+
+## 💰 赞助 / 推荐
+#### ☁️ [雨云 — 国内便宜稳定的云服务器，首月 5 折](https://www.rainyun.com/MjY0MzY1_)
+500M 带宽，高仿物理机，云服务器**15 元起**，通过此链接注册首月 5 折。
+
 ## 功能特性
 
 - **IDE 内阅读**：底部工具窗口展示小说内容，无需切出 IDE
