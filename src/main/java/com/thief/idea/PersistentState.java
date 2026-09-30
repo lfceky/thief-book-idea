@@ -49,6 +49,11 @@ public class PersistentState implements PersistentStateComponent<Element> {
     private String bossKey;
 
     /**
+     * 项目启动时默认以老板键状态显示工具窗口，默认关闭
+     **/
+    private boolean startInBossMode;
+
+    /**
      * 朗读播放/停止热键，默认 Ctrl+4
      **/
     private String ttsKey;
@@ -91,6 +96,7 @@ public class PersistentState implements PersistentStateComponent<Element> {
         element.setAttribute("lineCount",this.getLineCount());
         element.setAttribute("lineSpace",this.getLineSpace());
         element.setAttribute("bossKey",this.getBossKey());
+        element.setAttribute("startInBossMode", Boolean.toString(this.isStartInBossMode()));
         element.setAttribute("ttsKey", this.getTtsKey());
         element.setAttribute("ttsVoice", this.getTtsVoice());
         element.setAttribute("ttsRate", this.getTtsRate());
@@ -117,6 +123,7 @@ public class PersistentState implements PersistentStateComponent<Element> {
         this.setLineCount(state.getAttributeValue("lineCount"));
         this.setLineSpace(state.getAttributeValue("lineSpace"));
         this.setBossKey(state.getAttributeValue("bossKey"));
+        this.setStartInBossMode(Boolean.parseBoolean(state.getAttributeValue("startInBossMode")));
         this.setTtsKey(state.getAttributeValue("ttsKey"));
         this.setTtsVoice(state.getAttributeValue("ttsVoice"));
         this.setTtsRate(state.getAttributeValue("ttsRate"));
@@ -272,6 +279,14 @@ public class PersistentState implements PersistentStateComponent<Element> {
 
     public void setBossKey(String bossKey) {
         this.bossKey = bossKey;
+    }
+
+    public boolean isStartInBossMode() {
+        return startInBossMode;
+    }
+
+    public void setStartInBossMode(boolean startInBossMode) {
+        this.startInBossMode = startInBossMode;
     }
 
     public String getTtsKey() {

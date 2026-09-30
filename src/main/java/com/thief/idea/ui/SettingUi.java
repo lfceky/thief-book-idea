@@ -75,6 +75,7 @@ public class SettingUi {
     public JLabel label5;
     public JTextField next;
     public JTextField bossKey;
+    public JCheckBox startInBossMode;
     public JTextField ttsKey;
     public JButton removeBookButton;
     public JButton addBookButton;
@@ -193,6 +194,12 @@ public class SettingUi {
         hotkeysPanel.add(ttsKeyLabel, ttsConstraints.xy(2, 11));
         hotkeysPanel.add(ttsKey, ttsConstraints.xy(4, 11, CellConstraints.FILL, CellConstraints.DEFAULT));
         installHotkeyCapture(ttsKey);
+
+        startInBossMode = new JCheckBox("Start in Boss Mode");
+        FormLayout readerLayout = (FormLayout) readerPanel.getLayout();
+        readerLayout.appendRow(new RowSpec("6dlu"));
+        readerLayout.appendRow(new RowSpec("center:default:noGrow"));
+        readerPanel.add(startInBossMode, new CellConstraints().xyw(2, 7, 4));
     }
 
     /**
@@ -249,6 +256,7 @@ public class SettingUi {
         lineCount.setSelectedItem(persistentState.getLineCount());
         lineSpace.setSelectedItem(persistentState.getLineSpace());
         bossKey.setText(persistentState.getBossKey());
+        startInBossMode.setSelected(persistentState.isStartInBossMode());
         ttsKey.setText(persistentState.getTtsKey());
         updateFontPreview();
     }

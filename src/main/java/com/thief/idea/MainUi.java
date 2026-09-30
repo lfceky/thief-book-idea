@@ -393,6 +393,9 @@ public class MainUi implements ToolWindowFactory, DumbAware {
             this.content = content;
             // 打开工具窗口时自动加载书本并恢复上次阅读进度，无需手动点刷新
             refresh();
+            if (persistentState.isStartInBossMode()) {
+                toggleBoss();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -480,7 +483,7 @@ public class MainUi implements ToolWindowFactory, DumbAware {
             bookSelector.addItem(path);
         }
         bookSelector.setSelectedItem(selected);
-        bookSelector.setVisible(persistentState.getBookPathList().size() > 1);
+        bookSelector.setVisible(!hide && persistentState.getBookPathList().size() > 1);
     }
 
     /**
@@ -502,6 +505,10 @@ public class MainUi implements ToolWindowFactory, DumbAware {
      **/
     private void setPageText(String content) {
         lastContent = content;
+        if (hide) {
+            temp = content;
+            return;
+        }
         Font font = resolveFont();
         textPane.setFont(font);
         SimpleAttributeSet attrs = new SimpleAttributeSet();
@@ -628,7 +635,7 @@ public class MainUi implements ToolWindowFactory, DumbAware {
             model.addElement(entry);
         }
         tocList.setModel(model);
-        tocPanel.setVisible(true);
+        tocPanel.setVisible(!hide);
     }
 
     /**
@@ -1225,6 +1232,7 @@ public class MainUi implements ToolWindowFactory, DumbAware {
             if (ttsPanel != null) {
                 ttsPanel.setVisible(true);
             }
+            hide = false;
             setPageText(temp);
             if (content != null) {
                 content.setDisplayName("Thief-Book");
@@ -1232,7 +1240,6 @@ public class MainUi implements ToolWindowFactory, DumbAware {
             if (toolWindow != null) {
                 toolWindow.setIcon(originIcon);
             }
-            hide = false;
         } else {
             stopTts();
             for (JButton b : buttons) {
